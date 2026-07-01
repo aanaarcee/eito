@@ -953,3 +953,216 @@ section.hero-dest .dest-info-card {
   section.hero-dest { min-height: 64vh !important; padding: 100px 0 56px !important; }
   .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+*/ el estilo nuevo para lo de los paquetes x experiencias
+
+.experiencias-section {
+  padding: 5rem 0 4rem;
+}
+
+/* ── Lista de cards ── */
+.exp-pkg-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* ── Card horizontal ── */
+.exp-pkg-card {
+  display: flex;
+  flex-direction: row;
+  background: var(--surface, #fff);
+  border: 1px solid var(--border, #e8e5e0);
+  border-radius: 16px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+
+  /* Transición hover */
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+.exp-pkg-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.13);
+  color: inherit;
+}
+
+/* ── Imagen izquierda (35%) ── */
+.exp-pkg-img-wrap {
+  flex: 0 0 35%;
+  max-width: 35%;
+  overflow: hidden;
+  position: relative;
+}
+
+.exp-pkg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.exp-pkg-card:hover .exp-pkg-img {
+  transform: scale(1.04);
+}
+
+/* ── Cuerpo derecho (65%) ── */
+.exp-pkg-body {
+  flex: 1;
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+/* ── Cabecera: nombre + precio ── */
+.exp-pkg-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.exp-pkg-nombre {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--text-main, #1a1a1a);
+  margin: 0 0 0.25rem;
+  line-height: 1.25;
+}
+
+.exp-pkg-pais {
+  font-size: 0.83rem;
+  color: var(--text-light, #6b6b6b);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.exp-pkg-precio-wrap {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.exp-pkg-desde {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--text-light, #6b6b6b);
+  margin-bottom: 0.1rem;
+}
+
+.exp-pkg-precio {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main, #1a1a1a);
+  white-space: nowrap;
+}
+
+.exp-pkg-precio small {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--text-light, #6b6b6b);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* ── Grilla de datos ── */
+.exp-pkg-datos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem 1.5rem;
+}
+
+.exp-pkg-dato {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+/* Dato que ocupa el ancho completo (excursiones) */
+.exp-pkg-dato--full {
+  grid-column: 1 / -1;
+}
+
+.exp-pkg-dato > i {
+  font-size: 0.95rem;
+  color: var(--accent, #b8945a);
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+.exp-pkg-dato-lbl {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-light, #6b6b6b);
+  display: block;
+  line-height: 1;
+  margin-bottom: 0.15rem;
+}
+
+.exp-pkg-dato-val {
+  font-size: 0.875rem;
+  color: var(--text-main, #1a1a1a);
+  display: block;
+  line-height: 1.3;
+}
+
+/* ── Footer con botón ── */
+.exp-pkg-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border, #e8e5e0);
+}
+
+.exp-pkg-btn {
+  /* Hereda btn-search de style.css; solo ajustamos tamaño */
+  font-size: 0.85rem;
+  padding: 0.5rem 1.25rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 767px) {
+  .exp-pkg-card {
+    flex-direction: column;
+  }
+
+  .exp-pkg-img-wrap {
+    flex: 0 0 220px;
+    max-width: 100%;
+    height: 220px;
+  }
+
+  .exp-pkg-body {
+    padding: 1.25rem 1.25rem;
+  }
+
+  .exp-pkg-header {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .exp-pkg-precio-wrap {
+    text-align: left;
+  }
+
+  .exp-pkg-datos {
+    grid-template-columns: 1fr;
+  }
+
+  .exp-pkg-dato--full {
+    grid-column: auto;
+  }
+}

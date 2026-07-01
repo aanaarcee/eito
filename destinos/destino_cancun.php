@@ -67,22 +67,22 @@ $destination = [
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css?v=final"/>
+  <link rel="stylesheet" href="../style.css?v=final"/>
 </head>
 <body>
 
 <nav class="navbar-nomada navbar navbar-expand-lg px-3 px-lg-5">
   <div class="container-fluid">
-    <a class="nav-logo" href="index.html">Nómada<span class="dot">.</span></a>
+    <a class="nav-logo" href="../index.php">Nómada<span class="dot">.</span></a>
     <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-center" id="navMenu">
       <ul class="navbar-nav gap-0 mx-auto">
-        <li class="nav-item"><a class="nav-link-item nav-link" href="index.html">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link-item nav-link" href="index.html#destinos">Destinos</a></li>
-        <li class="nav-item"><a class="nav-link-item nav-link" href="index.html#paquetes">Paquetes</a></li>
-        <li class="nav-item"><a class="nav-link-item nav-link" href="index.html#contacto">Contacto</a></li>
+        <li class="nav-item"><a class="nav-link-item nav-link" href="../index.php">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link-item nav-link" href="../index.php#destinos">Destinos</a></li>
+        <li class="nav-item"><a class="nav-link-item nav-link" href="../index.php#paquetes">Paquetes</a></li>
+        <li class="nav-item"><a class="nav-link-item nav-link" href="../index.php#contacto">Contacto</a></li>
       </ul>
       <a href="#reserva" class="btn btn-login-nav mt-2 mt-lg-0">Reservar</a>
     </div>

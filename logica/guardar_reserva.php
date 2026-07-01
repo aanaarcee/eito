@@ -1,17 +1,17 @@
 <?php
 session_start();
-require_once __DIR__ . '/conexion.php';
+require_once __DIR__ . '/includes/db.php';
 
 // Requiere sesión iniciada. Ajustá el nombre de la variable de sesión
 // si en tu login usás otra clave (por ejemplo $_SESSION['usuario']['IdUsuario']).
 if (empty($_SESSION['IdUsuario'])) {
-    $volver = $_POST['volver_a'] ?? 'index.php';
-    header('Location: login.php?redirect=' . urlencode($volver));
+    $volver = $_POST['volver_a'] ?? '../index.php';
+    header('Location: ../login/login.php?redirect=' . urlencode($volver));
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: index.php');
+    header('Location: ../index.php');
     exit;
 }
 
@@ -21,7 +21,7 @@ $accion = $_POST['accion'] ?? '';
 $cantidadPasajeros = (int) ($_POST['pasajeros'] ?? 1);
 $fechaIda = $_POST['fecha_ida'] ?? '';
 $fechaVuelta = $_POST['fecha_vuelta'] ?? '';
-$volverA = $_POST['volver_a'] ?? 'index.php';
+$volverA = $_POST['volver_a'] ?? '../index.php';
 
 // Nota: el "origen" elegido en el form no se persiste porque la tabla
 // `detallecarrito`/`detallereserva` no tiene columna para eso en el

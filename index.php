@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,7 +17,7 @@
 </head>
 <body>
 
-<!-- ── NAVBAR ── -->
+<!-- ── barra de nav, arriba de todo ── -->
 <nav class="navbar-nomada navbar navbar-expand-lg px-3 px-lg-5">
   <div class="container-fluid">
     <a class="nav-logo" href="#">Nómada<span class="dot">.</span></a>
@@ -28,12 +31,21 @@
         <li class="nav-item"><a class="nav-link-item nav-link" href="#paquetes">Paquetes</a></li>
         <li class="nav-item"><a class="nav-link-item nav-link" href="#contacto">Contacto</a></li>
       </ul>
-      <a href="#" class="btn btn-login-nav mt-2 mt-lg-0">Iniciar sesión</a>
+      <?php if (!empty($_SESSION['IdUsuario'])) : ?>
+        <div class="d-flex align-items-center gap-3 mt-2 mt-lg-0">
+          <span class="nav-link-item" style="cursor:default;">
+            <i class="bi bi-person-circle me-1"></i><?php echo htmlspecialchars($_SESSION['NombreUsuario'] ?? 'Mi cuenta'); ?>
+          </span>
+          <a href="login/logout.php" class="btn btn-login-nav">Cerrar sesión</a>
+        </div>
+      <?php else : ?>
+        <a href="login/login.php?redirect=../index.php" class="btn btn-login-nav mt-2 mt-lg-0">Iniciar sesión</a>
+      <?php endif; ?>
     </div>
   </div>
 </nav>
 
-<!-- ── HERO ── -->
+<!-- ── inicio de la pag, hero ── -->
 <section class="hero">
   <div class="hero-photo"></div>
   <div class="hero-overlay"></div>
@@ -72,11 +84,11 @@
         </div>
       </div>
 
-      <!-- Right: search -->
+      <!-- busqueda x destino -->
       <div class="col-lg-7 search-wrap">
         <div class="search-box">
           <p style="font-size:.75rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--text-light); margin-bottom:1.25rem;">Buscá tu próximo viaje</p>
-          <form class="row g-3 align-items-end" method="GET" action="buscar.php">
+          <form class="row g-3 align-items-end" method="GET" action="logica/buscar.php">
             <div class="col-6 col-md-4">
               <label class="form-label">Origen</label>
               <select class="form-select search-input" name="origen">
@@ -133,7 +145,7 @@
   </div>
 </section>
 
-<!-- ── TRUST BAR ── -->
+<!-- ── barrita ── -->
 <div class="trust-bar">
   <div class="container">
     <div class="row g-3 justify-content-center">
@@ -177,7 +189,7 @@
   </div>
 </div>
 
-<!-- ── DESTINOS ── -->
+<!-- ── destinos ── -->
 <section class="dest-section" id="destinos">
   <div class="container">
     <div class="row align-items-end mb-4">
@@ -202,7 +214,7 @@
             <div class="dest-card-desc">Aguas turquesas, ruinas mayas y la mejor vida nocturna del Caribe mexicano.</div>
             <div class="dest-card-footer">
               <div><div class="dest-from">Desde</div><div class="dest-amount">$850 <small>USD</small></div></div>
-              <a class="btn-ver-mas" href="destino_cancun.php">Ver más</a>
+              <a class="btn-ver-mas" href="destinos/destino_cancun.php">Ver más</a>
             </div>
           </div>
         </div>
@@ -218,7 +230,7 @@
             <div class="dest-card-desc">Arte, gastronomía y arquitectura en la ciudad más romántica del mundo.</div>
             <div class="dest-card-footer">
               <div><div class="dest-from">Desde</div><div class="dest-amount">$1.420 <small>USD</small></div></div>
-              <a class="btn-ver-mas" href="destino_paris.php">Ver más</a>
+              <a class="btn-ver-mas" href="destinos/destino_paris.php">Ver más</a>
             </div>
           </div>
         </div>
@@ -291,7 +303,9 @@
   </div>
 </section>
 
-<!-- ── EXPERIENCES ── -->
+
+
+<!-- paquetes -->
 <section class="exp-section" id="paquetes">
   <div class="container">
     <div class="row mb-3">
@@ -312,7 +326,7 @@
   </div>
 </section>
 
-<!-- ── OFFERS ── -->
+<!-- ofertas -->   
 <section class="offers-section">
   <div class="container">
     <div class="row align-items-end mb-4">
@@ -414,7 +428,7 @@
   </div>
 </section>
 
-<!-- ── CTA BAND ── -->
+<!-- ── contactos ── -->
 <div class="cta-band fade-up">
   <div class="container">
     <h2>¿No encontrás lo que buscás?</h2>
@@ -426,7 +440,7 @@
   </div>
 </div>
 
-<!-- ── FOOTER ── -->
+<!-- ── footer ── -->
 <footer id="contacto">
   <div class="container">
     <div class="row g-5">
@@ -503,7 +517,7 @@
     </div>
   </div>
 </footer>
-// java de los diseños y animaciones:
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   // Navbar scroll
@@ -518,13 +532,13 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
 
-  const experiences = [
+  const experiences = [ // las imagenes de los paquetes y los botones que llevan a cada experiencia!!
     {
       category: 'Playa',
       title: 'Paraísos caribeños todo incluido',
       subtitle: 'Resorts frente al mar con playa privada y experiencias premium.',
       image: "img/playa1img.jpg",
-      link: 'detalle-playa.html',
+      link: 'paquetes_playa.php',
       size: 'main'
     },
     {
@@ -532,7 +546,7 @@
       title: 'Costa Atlántica Argentina',
       subtitle: 'Surf, familia y descanso en costas imperdibles.',
       image: "img/playa2img.jpg",
-      link: 'detalle-playa.html',
+      link: 'paquetes_playa.php',
       size: 'sm'
     },
     {
@@ -540,7 +554,7 @@
       title: 'Islas del Caribe',
       subtitle: 'Buceo, arena blanca y puestas de sol inolvidables.',
       image: "img/playa3img.jpg",
-      link: 'detalle-playa.html',
+      link: 'paquetes_playa.php',
       size: 'sm'
     },
     {
@@ -548,7 +562,7 @@
       title: 'Visita los Andes',
       subtitle: 'Senderos, lagunas y cumbres para los amantes de la altura.',
       image: "img/montanas1img.jpg",
-      link: 'detalle-montana.html',
+      link: 'paquetes_playa.php',
       size: 'main'
     },
     {
@@ -556,7 +570,7 @@
       title: 'Refugios de montaña',
       subtitle: 'Alojamientos con vistas épicas y caminatas al amanecer.',
       image: "img/montanas2img.jpg",
-      link: 'detalle-montana.html',
+      link: 'paquetes_playa.php',
       size: 'sm'
     },
     {
@@ -564,7 +578,7 @@
       title: 'Cumbres patagónicas',
       subtitle: 'Rutas de altura y paisajes glaciales para explorar.',
       image: "img/montanas3img.jpg",
-      link: 'detalle-montana.html',
+      link: 'paquetes_playa.php',
       size: 'sm'
     },
     {
@@ -572,7 +586,7 @@
       title: 'Safari extremo',
       subtitle: 'Rutas off-road, rafting y adrenalina en cada paso.',
       image: "img/aventura1img.jpg",
-      link: 'detalle-aventura.html',
+      link: 'paquetes_playa.php',
       size: 'main'
     },
     {
@@ -580,7 +594,7 @@
       title: 'Rafting y ríos salvajes',
       subtitle: 'Descensos intensos y campamentos junto al agua.',
       image: "img/aventuras2img.jpg",
-      link: 'detalle-aventura.html',
+      link: 'paquetes_playa.php',
       size: 'sm'
     },
     {
@@ -588,31 +602,31 @@
       title: 'Expedición 4x4',
       subtitle: 'Terrenos extremos y rutas fuera de lo común.',
       image: "img/aventuras3img.jpg",
-      link: 'detalle-aventura.html',
+      link: 'paquetes_playa.php',
       size: 'sm'
     },
     {
       category: 'Gastronomía',
       title: 'Tours culinarios en Europa',
       subtitle: 'Sabores locales, mercados y cenas gourmet.',
-      image: 'https://images.unsplash.com/photo-1498654896293-37aacf113fd9?w=900&q=80',
-      link: 'detalle-gastronomia.html',
+      image: 'img/gastro1img.jpg',
+      link: 'paquetes_playa.php',
       size: 'main'
     },
     {
       category: 'Gastronomía',
       title: 'Bares y bodegas',
       subtitle: 'Degustaciones y experiencias de vinos exclusivos.',
-      image: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=500&q=80',
-      link: 'detalle-gastronomia.html',
+      image: 'img/gastro2img.jpg',
+      link: 'paquetes_playa.php',
       size: 'sm'
     },
     {
       category: 'Gastronomía',
       title: 'Cocina local auténtica',
       subtitle: 'Clases y rutas de sabores tradicionales.',
-      image: 'https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?w=500&q=80',
-      link: 'detalle-gastronomia.html',
+      image: 'img/gastro3img.jpg',
+      link: 'paquetes_playa.php',
       size: 'sm'
     },
     {
@@ -620,7 +634,7 @@
       title: 'Vacaciones en familia',
       subtitle: 'Planes para todos los gustos: parques, playa y diversión.',
       image: "img/familiar1.jpg",
-      link: 'detalle-familiar.html',
+      link: 'paquetes_playa.php',
       size: 'main'
     },
     {
@@ -628,7 +642,7 @@
       title: 'Parques temáticos',
       subtitle: 'Diversión, shows y experiencias para grandes y chicos.',
       image: "img/familiar2.jpg",
-      link: 'detalle-familiar.html',
+      link: 'paquetes_playa.php',
       size: 'sm'
     },
     {
@@ -636,11 +650,11 @@
       title: 'Estadías a medida',
       subtitle: 'Alojamientos familiares con actividades seguras.',
       image: "img/familiar3.jpg",
-      link: 'detalle-familiar.html',
+      link: 'paquetes_playa.php',
       size: 'sm'
     }
   ];
-//diseños de la interfaz: 
+
   const expGrid = document.getElementById('expGrid');
   const expTabs = document.querySelectorAll('.exp-tab');
 
@@ -670,6 +684,7 @@
             <div class="exp-info">
               <div class="exp-cat">${item.category}</div>
               <div class="exp-name">${item.title}</div>
+              
             </div>
           </a>
         `;

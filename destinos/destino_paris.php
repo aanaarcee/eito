@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once __DIR__ . '/conexion.php';
+require_once __DIR__ . '/../logica/conexion.php';
 
 // ID real de este destino en la tabla `destinos` de la base de datos.
 // Ajustalo según el IdDestino que tenga París cuando cargues los datos.
@@ -92,31 +92,31 @@ $destino = [
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css?v=final"/>
+  <link rel="stylesheet" href="../style.css?v=final"/>
 </head>
 <body>
 
 <nav class="navbar-nomada navbar navbar-expand-lg px-3 px-lg-5">
   <div class="container-fluid">
-    <a class="nav-logo" href="index.html">Nómada<span class="dot">.</span></a>
+    <a class="nav-logo" href="../index.php">Nómada<span class="dot">.</span></a>
     <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-center" id="navMenu">
       <ul class="navbar-nav gap-0 mx-auto">
-        <li class="nav-item"><a class="nav-link-item nav-link" href="index.html">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link-item nav-link" href="index.html#destinos">Destinos</a></li>
-        <li class="nav-item"><a class="nav-link-item nav-link" href="index.html#paquetes">Paquetes</a></li>
-        <li class="nav-item"><a class="nav-link-item nav-link" href="index.html#contacto">Contacto</a></li>
+        <li class="nav-item"><a class="nav-link-item nav-link" href="../index.php">Inicio</a></li>
+        <li class="nav-item"><a class="nav-link-item nav-link" href="../index.php#destinos">Destinos</a></li>
+        <li class="nav-item"><a class="nav-link-item nav-link" href="../index.php#paquetes">Paquetes</a></li>
+        <li class="nav-item"><a class="nav-link-item nav-link" href="../index.php#contacto">Contacto</a></li>
       </ul>
       <div class="d-flex align-items-center gap-3 mt-2 mt-lg-0">
         <?php if (!empty($_SESSION['IdUsuario'])) : ?>
           <span class="nav-link-item" style="cursor:default;">
             <i class="bi bi-person-circle me-1"></i><?php echo htmlspecialchars($_SESSION['NombreUsuario'] ?? 'Mi cuenta'); ?>
           </span>
-          <a href="logout.php" class="btn btn-login-nav">Cerrar sesión</a>
+          <a href="../login/logout.php" class="btn btn-login-nav">Cerrar sesión</a>
         <?php else : ?>
-          <a href="login.php?redirect=destino_paris.php" class="btn btn-login-nav">Iniciar sesión</a>
+          <a href="../login/login.php?redirect=destinos/destino_paris.php" class="btn btn-login-nav">Iniciar sesión</a>
         <?php endif; ?>
         <a href="#reserva" class="btn btn-login-nav">Reservar</a>
       </div>
@@ -222,9 +222,9 @@ $destino = [
             <?php if ($mensaje) : ?>
               <div class="alert alert-<?php echo htmlspecialchars($mensajeTipo); ?>"><?php echo htmlspecialchars($mensaje); ?></div>
             <?php endif; ?>
-            <form method="post" action="guardar_reserva.php">
+            <form method="post" action="../logica/guardar_reserva.php">
               <input type="hidden" name="id_destino" value="<?php echo (int) ID_DESTINO_DB; ?>"/>
-              <input type="hidden" name="volver_a" value="destino_paris.php"/>
+              <input type="hidden" name="volver_a" value="destinos/destino_paris.php"/>
               <div class="mb-3">
                 <label class="form-label">Origen</label>
                 <select class="form-select" name="origen">

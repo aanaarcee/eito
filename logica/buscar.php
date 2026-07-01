@@ -7,7 +7,7 @@ session_start();
  * (el mismo "value" que pusiste en el <select name="destino"> del index).
  */
 $destinosDisponibles = [
-    'paris' => 'destino_paris.php',
+    'paris' => '../destinos/destino_paris.php',
     // 'cancun' => 'destino_cancun.php',
     // 'roma'   => 'destino_roma.php',
     // ...
@@ -21,7 +21,7 @@ $pasajeros = $_GET['pasajeros'] ?? '';
 
 // Si todavía no armamos ese destino, volvemos al listado con un aviso.
 if ($destinoSlug === '' || !isset($destinosDisponibles[$destinoSlug])) {
-    header('Location: index.php?no_disponible=1#destinos');
+    header('Location: ../index.php?no_disponible=1#destinos');
     exit;
 }
 
